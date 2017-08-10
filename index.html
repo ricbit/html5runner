@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> Tabajara Runner </title>
+
+	<style type="text/css">
+		
+*{
+	padding: 0px;
+}
+
+#bg01{
+	width: 1280px;
+	height: 720px;
+	position: relative;
+	margin: auto;
+	background-position-x: 0px;
+	background-image: url(img/bg01.png); 
+	overflow-y: hidden;
+	overflow-x: hidden;
+	}
+
+
+#bg02{
+	width: 1280px;
+	height: 720px;
+	position: absolute;
+	background-position-x: 0px;
+	background-image: url(img/bg02.png);
+	margin: 0px;
+	padding:0px;
+	}
+
+
+#action{
+	width: 1280px;
+	height: 720px;
+	position: absolute;
+	background-position-x: 0px;
+	background-image: url(img/action.png);
+	margin: 0px;
+	padding:0px; 
+	}
+
+
+#character{
+	width: 370px;
+	height: 370px;
+	position: absolute;
+	top: 250px;
+	left: 50px;
+	background-image: url(img/character.gif);
+	z-index: 1;
+}
+
+#pressButton {
+	width: 1280px;
+	height: 720px;
+	position: absolute;
+	border: 1px;
+	margin: 0px;
+	padding:0px;
+	z-index: 100;
+	}
+
+
+
+	</style>
+
+</head>
+<body>
+
+<div id=bg01 >
+	
+	<div id=bg02 >
+	 
+	 	<div id=action >	
+
+	 		<div id=character> </div>
+	 		
+	 		<div id=pressButton ></div>	
+
+	 	</div>
+
+	</div>
+
+</div>
+
+
+
+
+
+
+<script type="text/javascript">
+	
+	var bg02 = 0;
+	var action  = 0;
+	var front = 0;
+
+
+//função que move o background 02 - os prédios //
+function bg02Move(){
+	bg02 += -5;
+	
+		if (bg02 < -1275){
+			bg02 = 0
+		}
+
+
+	document.querySelector("#bg02").style.backgroundPositionX = bg02 + "px ";
+}
+
+//função que controla o scroll do chão onde está o personagem //
+function actionMove(){
+	action += -16;
+	
+		if (action < -1274){
+			action = 0
+		}
+
+
+	document.querySelector("#action").style.backgroundPositionX = action + "px ";
+}
+
+
+// loop que faz com que todos os cenários fiquem se movimentando. O Paralax aqui nãoé dinãmico, apenas uma animação em loop com velocidades diferentes entre si //
+scroll();
+
+	function scroll (){
+		requestAnimationFrame(scroll);
+		bg02Move();
+		actionMove();
+		
+	}
+
+//iniciando o loop para chamar os troncos//
+startHurdles(); //chama o enviador de troncos//
+
+
+//essa primeira função controla o tempo de chamada dos dois troncos//
+function startHurdles (){
+
+	setTimeout(sendHurdle01, (Math.floor(Math.random()*2000 + 500)));
+
+}
+
+
+//essa função controla o envio imediato do tronco pequeno e chama novamente o controle de envio de troncos//
+function sendHurdle01(){
+
+	hurdle01(); //chama um tronco pequeno hurdle01//
+	startHurdles();
+
+}
+
+
+
+// HURDLE01 o tronco pequeno inicio do processo //
+
+var hurdle01Id = 0; //criando variável global que será usada para diferenciar cada troco pequeno //
+
+
+
+//function para deixar tudo o que está abaixo como variáveis particulares //
+function hurdle01 (){
+
+
+//criando uma Div dinamicamente //
+
+	hurdle01Id += 1; 
+	//dando mais um para a variável global. A intenção aqui é fazer com que essa variável cresça 1 cada vez que o tronco for chamado. Assim esse número pode ser usado para ser o prefixo da DIV. Apesar de tudo aqui dentro ter sua variável privada, essa DIV será criada no arquivo HTML e ela precisará ser diferente de outras para que sua movimentação, quando puxada pelo querySelector, seja única, e não influencie outras DIVs. Então, o nome da div será "Hurdle01" + o número dessa variável.//
+
+	//criando a div//
+	var div = document.createElement("div");
+		div.id = "hurdle01" + hurdle01Id;
+		div.style.width = "215px";
+		div.style.height = "200px";
+		div.style.position = "absolute";
+		div.style.top = "480px";
+		div.style.left = "100px";
+		div.style.backgroundImage = "url(img/hurdle01.png)";
+		div.style.zIndex = "4";
+	
+	var thishurdle01 = "hurdle01" + hurdle01Id; // fixando ID dessa DIV dentro de uma variável, porque ela será usada continuamente pelo sistema de loop logo abaixo //
+
+	// colocando a div dentro da área de Action//
+	document.getElementById("action").appendChild(div);
+
+
+
+	//Loop de posição eixo X - tronco longe até chegar perto e sumir //
+
+	var  hurdleXPos = 1280; // variável que subistituirpa o eixo X //
+	
+hurdle01Move(); //inicia o loop para andar //
+
+	function hurdle01Move (){
+		hurdle01Loop = requestAnimationFrame(hurdle01Move);
+		
+
+		hurdleXPos -= 16; //velocidade do tronco e abaixo ela sendo aplicada à movimentação da dive//
+		document.getElementById(thishurdle01).style.left= hurdleXPos + "px ";
+
+			//controle de contato entre tronco e personagem //
+
+
+
+			//destruindo a DIV depois que ela passa da tela//
+			if (hurdleXPos < -215){
+				document.getElementById(thishurdle01).remove(); //chamando a DIV pelo nome e removendo-a;
+				cancelAnimationFrame(hurdle01Loop); // Cancelando o loop com o nome criado ali em cima//
+
+			}
+	}
+
+}
+
+</script>
+</body>
+</html>
