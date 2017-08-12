@@ -93,6 +93,27 @@
     padding: 10px;
 }
 
+@keyframes log {
+  0% {
+    left: 1280px;
+  }
+  100% {
+    left: 0px;
+  }
+}
+
+
+.hurdle {
+		width: 215px;
+		height: 200px;
+		position: absolute;
+		top: 480px;
+		left: 100px;
+		background-image: url(img/hurdle01.png);
+		z-index: 4;
+          animation: log 1.33s linear 0s infinite normal;
+}
+
 	</style>
 
         <script>
@@ -130,9 +151,6 @@ function main() {
 
 <script type="text/javascript">
 	
-	var front = 0;
-
-
 
 // loop que faz com que todos os cenários fiquem se movimentando. O Paralax aqui nãoé dinãmico, apenas uma animação em loop com velocidades diferentes entre si //
 scroll();
@@ -185,13 +203,7 @@ function hurdle01 (){
 	//criando a div//
 	var div = document.createElement("div");
 		div.id = "hurdle01" + hurdle01Id;
-		div.style.width = "215px";
-		div.style.height = "200px";
-		div.style.position = "absolute";
-		div.style.top = "480px";
-		div.style.left = "100px";
-		div.style.backgroundImage = "url(img/hurdle01.png)";
-		div.style.zIndex = "4";
+                div.className = "hurdle";
 	
 	var thishurdle01 = "hurdle01" + hurdle01Id; // fixando ID dessa DIV dentro de uma variável, porque ela será usada continuamente pelo sistema de loop logo abaixo //
 
@@ -211,7 +223,6 @@ hurdle01Move(); //inicia o loop para andar //
 		
 
 		hurdleXPos -= 16; //velocidade do tronco e abaixo ela sendo aplicada à movimentação da dive//
-		document.getElementById(thishurdle01).style.left= hurdleXPos + "px ";
 
 			//controle de contato entre tronco e personagem //
 
