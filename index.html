@@ -40,36 +40,26 @@
           animation: building 4.26s linear 0s infinite normal;
 	}
 
-@keyframes ground {
-  0% {
-    background-position-x: 0px;
-  }
-  100% {
-    background-position-x: -1280px;
-  }
-}
-
-
 #action{
-	width: 1280px;
+	width: 2560px;
 	height: 720px;
 	position: absolute;
-	background-position-x: 0px;
 	background-image: url(img/action.png);
+          background-repeat: repeat-x;
 	margin: 0px;
 	padding:0px; 
-          animation: ground 1.33s linear 0s infinite normal;
+          animation: building 1.33s linear 0s infinite normal;
 	}
 
 
 #character{
 	width: 370px;
 	height: 370px;
-	position: absolute;
 	top: 250px;
 	left: 50px;
 	background-image: url(img/character.gif);
 	z-index: 1;
+          position: fixed;
 }
 
 #pressButton {
@@ -106,13 +96,13 @@
 .hurdle {
 		width: 215px;
 		height: 200px;
-		position: absolute;
 		top: 480px;
 		left: 100px;
 		background-image: url(img/hurdle01.png);
 		z-index: 4;
           animation: log 1.33s linear 0s infinite normal;
             left: 0px;
+              position: fixed;
 }
 
 	</style>
@@ -137,11 +127,11 @@ function main() {
 	</div>
 	 	<div id=action >	
 
+	 	</div>
 	 		<div id=character> </div>
 	 		
 	 		<div id=pressButton ></div>	
 
-	 	</div>
 
 </div>
 
@@ -209,7 +199,7 @@ function hurdle01 (){
 	var thishurdle01 = "hurdle01" + hurdle01Id; // fixando ID dessa DIV dentro de uma variável, porque ela será usada continuamente pelo sistema de loop logo abaixo //
 
 	// colocando a div dentro da área de Action//
-	document.getElementById("action").appendChild(div);
+	document.getElementById("bg01").appendChild(div);
 
 
 
