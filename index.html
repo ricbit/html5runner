@@ -21,6 +21,14 @@ body{
 	overflow-x: hidden;
 	}
 
+@keyframes building {
+  0% {
+    background-position-x: 0px;
+  }
+  100% {
+    background-position-x: -1024px;
+  }
+}
 
 #bg02{
 	width: 1280px;
@@ -30,6 +38,7 @@ body{
 	background-image: url(img/bg02.png);
 	margin: 0px;
 	padding:0px;
+          animation: building 3.41s linear 0s infinite normal;
 	}
 
 
@@ -110,22 +119,9 @@ function main() {
 
 <script type="text/javascript">
 	
-	var bg02 = 0;
 	var action  = 0;
 	var front = 0;
 
-
-//função que move o background 02 - os prédios //
-function bg02Move(){
-	bg02 += -5;
-	
-		if (bg02 < -1275){
-			bg02 = 0
-		}
-
-
-	document.querySelector("#bg02").style.backgroundPositionX = bg02 + "px ";
-}
 
 //função que controla o scroll do chão onde está o personagem //
 function actionMove(){
@@ -145,7 +141,6 @@ scroll();
 
 	function scroll (){
 		requestAnimationFrame(scroll);
-		bg02Move();
 		actionMove();
                 var time = new Date();
                 var fps = Math.floor(1000.0 / (time - window.currentTime));
