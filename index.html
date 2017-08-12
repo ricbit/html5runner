@@ -22,19 +22,19 @@
 
 @keyframes building {
   0% {
-    background-position-x: 0px;
+    transform: translate(0px);
   }
   100% {
-    background-position-x: -1280px;
+    transform: translate(-1280px);
   }
 }
 
 #bg02{
-	width: 1280px;
+	width: 2560px;
 	height: 720px;
 	position: absolute;
-	background-position-x: 0px;
 	background-image: url(img/bg02.png);
+          background-repeat: repeat-x;
 	margin: 0px;
 	padding:0px;
           animation: building 4.26s linear 0s infinite normal;
@@ -95,10 +95,10 @@
 
 @keyframes log {
   0% {
-    left: 1280px;
+    transform: translate(1280px);
   }
   100% {
-    left: 0px;
+    transform: translate(0px);
   }
 }
 
@@ -112,6 +112,7 @@
 		background-image: url(img/hurdle01.png);
 		z-index: 4;
           animation: log 1.33s linear 0s infinite normal;
+            left: 0px;
 }
 
 	</style>
@@ -132,6 +133,8 @@ function main() {
 	
 	<div id=bg02 >
 	 
+
+	</div>
 	 	<div id=action >	
 
 	 		<div id=character> </div>
@@ -139,8 +142,6 @@ function main() {
 	 		<div id=pressButton ></div>	
 
 	 	</div>
-
-	</div>
 
 </div>
 
