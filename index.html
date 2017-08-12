@@ -26,7 +26,7 @@ body{
     background-position-x: 0px;
   }
   100% {
-    background-position-x: -1024px;
+    background-position-x: -1280px;
   }
 }
 
@@ -38,8 +38,17 @@ body{
 	background-image: url(img/bg02.png);
 	margin: 0px;
 	padding:0px;
-          animation: building 3.41s linear 0s infinite normal;
+          animation: building 4.26s linear 0s infinite normal;
 	}
+
+@keyframes ground {
+  0% {
+    background-position-x: 0px;
+  }
+  100% {
+    background-position-x: -1280px;
+  }
+}
 
 
 #action{
@@ -50,6 +59,7 @@ body{
 	background-image: url(img/action.png);
 	margin: 0px;
 	padding:0px; 
+          animation: ground 1.33s linear 0s infinite normal;
 	}
 
 
@@ -119,21 +129,8 @@ function main() {
 
 <script type="text/javascript">
 	
-	var action  = 0;
 	var front = 0;
 
-
-//função que controla o scroll do chão onde está o personagem //
-function actionMove(){
-	action += -16;
-	
-		if (action < -1274){
-			action = 0
-		}
-
-
-	document.querySelector("#action").style.backgroundPositionX = action + "px ";
-}
 
 
 // loop que faz com que todos os cenários fiquem se movimentando. O Paralax aqui nãoé dinãmico, apenas uma animação em loop com velocidades diferentes entre si //
@@ -141,7 +138,6 @@ scroll();
 
 	function scroll (){
 		requestAnimationFrame(scroll);
-		actionMove();
                 var time = new Date();
                 var fps = Math.floor(1000.0 / (time - window.currentTime));
                 window.fps.textContent = fps + " fps";
