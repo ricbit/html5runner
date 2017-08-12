@@ -63,12 +63,30 @@
 	z-index: 100;
 	}
 
-
+#fps {
+    width: 100px;
+    height: 40px;
+    background-color: black;
+    color: white;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    padding: 10px;
+}
 
 	</style>
 
+        <script>
+
+function main() {
+  window.fps = document.getElementById("fps" );
+  window.currentTime = new Date();
+}
+
+        </script>
+
 </head>
-<body>
+<body onload="main();">
 
 <div id=bg01 >
 	
@@ -87,7 +105,7 @@
 </div>
 
 
-
+<div id="fps"></div>
 
 
 
@@ -130,7 +148,10 @@ scroll();
 		requestAnimationFrame(scroll);
 		bg02Move();
 		actionMove();
-		
+                var time = new Date();
+                var fps = Math.floor(1000.0 / (time - window.currentTime));
+                window.fps.textContent = fps + " fps";
+		window.currentTime = time;
 	}
 
 //iniciando o loop para chamar os troncos//
